@@ -1,0 +1,314 @@
+<form
+  [formGroup]="form"
+  class="application-view-settings--container"
+  *contentLoading="(applicationLoading$ | async) || false || loadingForm"
+  (submit)="onSubmit()"
+>
+  <!-- Basic Information -->
+  <div class="application-settings--container flex flex-col md:flex-row">
+    <div
+      class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+    >
+      Basic Information
+    </div>
+    <div class="section-container w-full md:w-3/4">
+      <div class="mb-6">
+        <label for="appname" class="block text-sm text-gray-700"
+          >Name <span class="text-red-500">*</span></label
+        >
+        <input
+          formControlName="applicationName"
+          id="appname"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          type="text"
+          value="JackNPoy.com"
+        />
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="applicationNameControl && applicationNameControl.invalid"
+        >
+          {{ applicationNameControl | fieldValidator }}
+        </p>
+      </div>
+      <div class="mb-6">
+        <label for="domain" class="block text-sm text-gray-700"
+          >Client Domain <span class="text-red-500">*</span></label
+        >
+        <div class="relative">
+          <input
+            formControlName="domain"
+            id="domain"
+            class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+            type="text"
+            placeholder="https://yourdomain.com"
+          />
+          <p
+            class="text-xs text-red-700 mt-1"
+            *ngIf="domainControl && domainControl.invalid"
+          >
+            {{ domainControl | fieldValidator }}
+          </p>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="applicaitonType" class="block text-sm text-gray-700"
+          >Application Type <span class="text-red-500">*</span></label
+        >
+        <div class="relative">
+          <select
+            formControlName="applicationType"
+            class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          >
+            <option [value]="applicationTypes.WEB">Web</option>
+            <option [value]="applicationTypes.MOBILE">Mobile</option>
+          </select>
+          <p
+            class="text-xs text-red-700 mt-1"
+            *ngIf="applicationTypeControl && applicationTypeControl.invalid"
+          >
+            {{ applicationTypeControl | fieldValidator }}
+          </p>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="app-description" class="block text-sm text-gray-700"
+          >Description</label
+        >
+        <textarea
+          formControlName="description"
+          id="app-description"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          rows="4"
+        ></textarea>
+        <p class="mt-1 text-xs">
+          A free text description of the application. Max character count is
+          140.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-divider"></div>
+  <!-- Settings -->
+  <div
+    class="application-settings--container flex flex-col md:flex-row"
+    formGroupName="settings"
+  >
+    <div
+      class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+    >
+      Settings
+    </div>
+    <div class="section-container w-full md:w-3/4">
+      <div class="mb-6">
+        <label for="throttle" class="block text-sm text-gray-700"
+          >Throttle</label
+        >
+        <input
+          formControlName="throttle"
+          id="throttle"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          type="number"
+          min="1"
+        />
+        <p class="mt-1 text-xs">
+          This setting allows you to set the number of API throttles per user.
+        </p>
+      </div>
+      <div class="mb-6">
+        <label for="redirectUrl" class="block text-sm text-gray-700"
+          >Redirect URL</label
+        >
+        <input
+          formControlName="redirectUrl"
+          id="redirectUrl"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          type="text"
+        />
+        <p class="mt-1 text-xs">
+          This will be the redirect url which holds the `token` after a
+          successful authentication.
+        </p>
+      </div>
+      <div class="mb-6">
+        <label for="userTokenValidity" class="block text-sm text-gray-700"
+          >User Token Validity</label
+        >
+        <input
+          formControlName="userTokenValidity"
+          id="userTokenValidity"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          type="number"
+          min="1"
+        />
+        <p class="mt-1 text-xs">
+          Number of days for which user tokens will expire.
+        </p>
+      </div>
+      <div class="mb-6">
+        <mat-slide-toggle formControlName="enableCrossOrigin" color="primary"
+          ><span class="text-sm text-gray-700">Enable Cross Origins</span>
+        </mat-slide-toggle>
+      </div>
+      <div class="mb-6">
+        <mat-slide-toggle formControlName="autoVerifyEmail" color="primary"
+          ><span class="text-sm text-gray-700">Auto Verify Email</span>
+        </mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <div class="theme-divider"></div>
+  <!-- Application URIs Settings -->
+  <div class="application-settings--container flex flex-col md:flex-row">
+    <div
+      class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+    >
+      Application URIs
+    </div>
+    <div class="section-container w-full md:w-3/4">
+      <div class="mb-6">
+        <label for="allowed-callback-urls" class="block text-sm text-gray-700"
+          >Allowed Callback URLs</label
+        >
+        <textarea
+          formControlName="callbackUrls"
+          id="allowed-callback-urls"
+          class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          rows="4"
+        ></textarea>
+        <p class="mt-1 text-xs">
+          After the user authenticates we will only call back to any of these
+          URLs. You can specify multiple valid URLs by comma-separating them
+          (typically to handle different environments like QA or testing). Make
+          sure to specify the protocol (https://) otherwise the callback may
+          fail in some cases. With the exception of custom URI schemes for
+          native clients, all callbacks should use protocol https://.
+        </p>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="enableCrossOriginControl?.value">
+    <div class="theme-divider"></div>
+    <!-- CORS Settings -->
+    <div class="application-settings--container flex flex-col md:flex-row">
+      <div
+        class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+      >
+        Cross-Origin Authentication
+      </div>
+      <div class="section-container w-full md:w-3/4">
+        <div class="mb-6">
+          <label for="allowed-origins" class="block text-sm text-gray-700"
+            >Allowed Origins</label
+          >
+          <textarea
+            formControlName="crossOriginUrls"
+            id="allowed-origins"
+            class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+            rows="4"
+          ></textarea>
+          <p class="mt-1 text-xs">
+            Comma-separated list of allowed origins for use with Cross-Origin
+            Authentication.
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="theme-divider"></div>
+  <!-- Metadata -->
+  <div class="user-settings--container flex flex-col md:flex-row">
+    <div
+      class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+    >
+      Metadata
+    </div>
+    <div class="section-container w-full md:w-3/4">
+      <div class="mb-10">
+        <label for="user_metadata" class="block text-sm text-gray-700"
+          >user_metadata.json</label
+        >
+        <ngs-code-editor
+          [theme]="theme"
+          [codeModel]="userMedataDataCodeModel"
+          [options]="options"
+          [dependencies]="dependencies"
+          (valueChanged)="onCodeChanged($event, 'userMetadata')"
+          codeValidator
+        >
+        </ngs-code-editor>
+        <p
+          class="text-sm text-red-700"
+          *ngIf="userMetaDataControl && userMetaDataControl.invalid"
+        >
+          {{ userMetaDataControl | fieldValidator }}
+        </p>
+        <p class="mt-1 text-xs">
+          Data that the user has read/write access to (e.g. color_preference,
+          blog_url, etc.)
+        </p>
+      </div>
+      <div class="mb-6">
+        <label for="app_metadata" class="block text-sm text-gray-700"
+          >app_metadata.json</label
+        >
+        <ngs-code-editor
+          [theme]="theme"
+          [codeModel]="appMedataDataCodeModel"
+          [options]="options"
+          [dependencies]="dependencies"
+          (valueChanged)="onCodeChanged($event, 'appMetadata')"
+          codeValidator
+        >
+        </ngs-code-editor>
+        <p
+          class="text-sm text-red-700"
+          *ngIf="appMetaDataControl && appMetaDataControl.invalid"
+        >
+          {{ appMetaDataControl | fieldValidator }}
+        </p>
+        <p class="mt-1 text-xs">
+          Data that the user has read-only access to (e.g. roles, permissions,
+          vip, etc)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-divider"></div>
+  <!-- Danger Zone -->
+  <div
+    class="danger-zone--container flex flex-col md:flex-row border border-red-200 rounded bg-red-100 p-4"
+  >
+    <div class="section-label text-lg font-medium text-red-900 w-full md:w-1/4">
+      Danger Zone
+    </div>
+    <div class="section-container w-full md:w-3/4">
+      <div class="mb-6">
+        <div class="text-sm mt-2 text-red-900 mb-4">
+          <p class="font-semibold">Delete this application</p>
+          <p>All your apps using this client will stop working.</p>
+        </div>
+        <button
+          type="button"
+          class="btn-theme btn-theme-danger btn-theme-sm"
+          (click)="onDelete()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="theme-divider"></div>
+  <!-- Action -->
+  <div class="action-buttons">
+    <button
+      type="submit"
+      class="btn-theme btn-theme-primary mx-auto"
+      loadingButton
+      [disabled]="loading || form.invalid"
+      [isLoading]="loading"
+    >
+      <span>Save Changes</span>
+    </button>
+  </div>
+</form>

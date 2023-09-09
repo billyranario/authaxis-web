@@ -1,0 +1,86 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Custom Theme
+$primary-color: #71C2FF;
+$primary-color-light: #A8D7FA;
+$primary-color-dark: #1766a3;
+
+$theme-primary-color: (
+  50 : lighten($primary-color-light, 45%),
+  100 : lighten($primary-color-light, 30%),
+  200 : lighten($primary-color-light, 15%),
+  300 : $primary-color-light,
+  400 : mix($primary-color, $primary-color-light, 50%),
+  500 : $primary-color,
+  600 : mix($primary-color, $primary-color-dark, 50%),
+  700 : $primary-color-dark,
+  800 : darken($primary-color-dark, 15%),
+  900 : darken($primary-color-dark, 30%),
+  A100 : lighten($primary-color, 30%),
+  A200 : $primary-color,
+  A400 : darken($primary-color, 15%),
+  A700 : darken($primary-color, 30%),
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$authaxis-web-primary: mat.define-palette($theme-primary-color);
+$authaxis-web-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$authaxis-web-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$authaxis-web-theme: mat.define-light-theme((
+  color: (
+    primary: $authaxis-web-primary,
+    accent: $authaxis-web-accent,
+    warn: $authaxis-web-warn,
+  )
+));
+
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($authaxis-web-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '../node_modules/@fortawesome/fontawesome-free/scss/regular';
+@import '../node_modules/@fortawesome/fontawesome-free/scss/solid';
+@import '../node_modules/@fortawesome/fontawesome-free/scss/brands';
+
+@import './assets/styles';

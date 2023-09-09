@@ -1,0 +1,71 @@
+<div class="container mx-auto px-6 py-8">
+  <div class="flex items-center justify-between">
+    <h3 class="text-2xl font-medium">Users</h3>
+
+    <button
+      class="btn-theme btn-theme-primary"
+      (click)="onOpenCreateUserDialog()"
+    >
+      <i class="fas fa-plus"></i> Create User
+    </button>
+  </div>
+  <div class="mt-5 text-gray-700">
+    <div class="page--description text-sm text-gray-500">
+      An easy to use UI to help administrators manage user identities including
+      password resets, creating and provisioning, blocking and deleting users.
+    </div>
+
+    <div class="table-filter--container flex mt-10">
+      <div class="flex items-center justify-end w-full gap-2">
+        <ui-tenant-dropdown
+          classes="w-full md:w-full px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          (selectedOptionEvent)="onSelectApplication($event)"
+        ></ui-tenant-dropdown>
+        <input
+          class="w-full md:w-3/4 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+          type="text"
+          placeholder="Search user"
+        />
+        <button class="btn-theme btn-theme-secondary-outline">Search</button>
+      </div>
+    </div>
+
+    <div class="page--data-table mt-5">
+      <table class="theme-table table-auto w-full">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Logins</th>
+            <th>Last Login</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of users; trackBy: trackById">
+            <tr
+              class="cursor-pointer hover:bg-gray-200"
+              (click)="onViewUser(user.id)"
+            >
+              <td>
+                <div class="table-details">
+                  <div class="table-title">Billy Joel Ranario</div>
+                  <div class="text-sm text-gray-400">
+                    billyranario@gmail.com
+                  </div>
+                </div>
+              </td>
+              <td>109</td>
+              <td>June 15th 2023, 4:56:10 PM</td>
+              <td (click)="$event.stopPropagation()">
+                <div class="relative inline-block text-left flex justify-end">
+                  <ui-dropdown id="1" [options]="tableMenuItemOptions">
+                  </ui-dropdown>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

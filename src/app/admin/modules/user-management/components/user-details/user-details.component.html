@@ -1,0 +1,169 @@
+<div class="user-view-settings--container">
+  <form (submit)="onSubmit()" [formGroup]="form">
+    <!-- Basic Information -->
+    <div class="user-settings--container flex flex-col md:flex-row">
+      <div
+        class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+      >
+        Basic Information
+      </div>
+      <div class="section-container w-full md:w-3/4">
+        <div class="mb-6 flex">
+          <div class="w-1/2">
+            <label for="name" class="block text-sm text-gray-700"
+              >Latest Login</label
+            >
+            <div class="text-sm">June 15th 2023, 4:56:10 PM</div>
+          </div>
+          <div class="w-1/2">
+            <label for="name" class="block text-sm text-gray-700"
+              >Signed Up
+            </label>
+            <div class="text-sm">June 15th 2023, 4:56:10 PM</div>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="name" class="block text-sm text-gray-700"
+            >Name <span class="text-red-500">*</span></label
+          >
+          <input
+            formControlName="name"
+            id="name"
+            class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+            type="text"
+          />
+          <p
+            class="text-sm text-red-700"
+            *ngIf="nameControl && nameControl.invalid"
+          >
+            {{ nameControl | fieldValidator }}
+          </p>
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-sm text-gray-700"
+            >Email (Unverified)</label
+          >
+          <div class="relative">
+            <input
+              formControlName="email"
+              id="email"
+              class="w-full mt-2 px-4 py-4 rounded-lg bg-white border border-gray-200 placeholder-gray-500 text-sm"
+              type="email"
+            />
+            <p
+              class="text-sm text-red-700"
+              *ngIf="emailControl && emailControl.invalid"
+            >
+              {{ emailControl | fieldValidator }}
+            </p>
+          </div>
+          <p class="mt-1 text-xs">
+            Email address is currently unverified.
+            <a class="text-theme-primary">Click here Verify Email</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="theme-divider"></div>
+    <!-- Metadata -->
+    <div class="user-settings--container flex flex-col md:flex-row">
+      <div
+        class="section-label text-lg font-medium text-gray-700 w-full md:w-1/4"
+      >
+        Metadata
+      </div>
+      <div class="section-container w-full md:w-3/4">
+        <div class="mb-10">
+          <label for="user_metadata" class="block text-sm text-gray-700"
+            >user_metadata.json</label
+          >
+          <ngs-code-editor
+            [theme]="theme"
+            [codeModel]="userMedataDataCodeModel"
+            [options]="options"
+            [dependencies]="dependencies"
+            (valueChanged)="onCodeChanged($event, 'user_metadata')"
+            codeValidator
+          >
+          </ngs-code-editor>
+          <p
+            class="text-sm text-red-700"
+            *ngIf="userMetaDataControl && userMetaDataControl.invalid"
+          >
+            {{ userMetaDataControl | fieldValidator }}
+          </p>
+          <p class="mt-1 text-xs">
+            Data that the user has read/write access to (e.g. color_preference,
+            blog_url, etc.)
+          </p>
+        </div>
+        <div class="mb-6">
+          <label for="app_metadata" class="block text-sm text-gray-700"
+            >app_metadata.json</label
+          >
+          <ngs-code-editor
+            [theme]="theme"
+            [codeModel]="appMedataDataCodeModel"
+            [options]="options"
+            [dependencies]="dependencies"
+            (valueChanged)="onCodeChanged($event, 'app_metadata')"
+            codeValidator
+          >
+          </ngs-code-editor>
+          <p
+            class="text-sm text-red-700"
+            *ngIf="appMetaDataControl && appMetaDataControl.invalid"
+          >
+            {{ appMetaDataControl | fieldValidator }}
+          </p>
+          <p class="mt-1 text-xs">
+            Data that the user has read-only access to (e.g. roles, permissions,
+            vip, etc)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="theme-divider"></div>
+    <!-- Danger Zone -->
+    <div
+      class="danger-zone--container flex flex-col md:flex-row border border-red-200 rounded bg-red-100 p-4"
+    >
+      <div
+        class="section-label text-lg font-medium text-red-900 w-full md:w-1/4"
+      >
+        Danger Zone
+      </div>
+      <div class="section-container w-full md:w-3/4">
+        <div class="mb-6">
+          <div class="text-sm mt-2 text-red-900 mb-4">
+            <p class="font-semibold">Block this user</p>
+            <p>This action will block this user from its origin application.</p>
+          </div>
+          <button type="button" class="btn-theme btn-theme-danger btn-theme-sm">
+            Block
+          </button>
+        </div>
+        <div class="mb-6">
+          <div class="text-sm mt-2 text-red-900 mb-4">
+            <p class="font-semibold">Delete this user</p>
+            <p>This action will delete user permanently.</p>
+          </div>
+          <button type="button" class="btn-theme btn-theme-danger btn-theme-sm">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="theme-divider"></div>
+    <!-- Action -->
+    <div class="action-buttons">
+      <button
+        type="submit"
+        [disabled]="hasInvalidInput"
+        class="btn-theme btn-theme-primary mx-auto"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>

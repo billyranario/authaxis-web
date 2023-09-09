@@ -1,0 +1,153 @@
+<form class="mx-auto bg-white" [formGroup]="form" (submit)="onSubmit()">
+  <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+    <h3 class="dialog--title text-lg leading-6 font-medium text-gray-900">
+      Create User
+    </h3>
+    <div class="dialog--body mt-5">
+      <div class="mb-6">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Application <i class="fa-solid fa-asterisk field-important"></i
+        ></label>
+        <ui-tenant-dropdown
+          (selectedOptionEvent)="onSelectApplication($event)"
+        ></ui-tenant-dropdown>
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="tenantIdControl && tenantIdControl.invalid"
+        >
+          {{ tenantIdControl | fieldValidator }}
+        </p>
+      </div>
+      <div class="grid grid-flow-col justify-stretch gap-3">
+        <div class="mb-6">
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >First Name <i class="fa-solid fa-asterisk field-important"></i
+          ></label>
+          <input
+            formControlName="firstname"
+            class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+            type="text"
+          />
+          <p
+            class="text-xs text-red-700 mt-1"
+            *ngIf="firstnameControl && firstnameControl.invalid"
+          >
+            {{ firstnameControl | fieldValidator }}
+          </p>
+        </div>
+        <div class="mb-6">
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Last Name <i class="fa-solid fa-asterisk field-important"></i
+          ></label>
+          <input
+            formControlName="lastname"
+            class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+            type="text"
+          />
+          <p
+            class="text-xs text-red-700 mt-1"
+            *ngIf="lastnameControl && lastnameControl.invalid"
+          >
+            {{ lastnameControl | fieldValidator }}
+          </p>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Email <i class="fa-solid fa-asterisk field-important"></i
+        ></label>
+        <input
+          formControlName="email"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          type="email"
+        />
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="emailControl && emailControl.invalid"
+        >
+          {{ emailControl | fieldValidator }}
+        </p>
+      </div>
+      <div class="mb-6">
+        <div class="flex">
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Password <i class="fa-solid fa-asterisk field-important"></i
+          ></label>
+
+          <div class="ml-auto">
+            <span
+              class="cursor-pointer text-sm text-blue-500 hover:text-blue-700"
+              (click)="onGeneratePassword()"
+            >
+              Generate Password
+          </span>
+          </div>
+        </div>
+        <input
+          formControlName="password"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          type="text"
+        />
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="passwordControl && passwordControl.invalid"
+        >
+          {{ passwordControl | fieldValidator }}
+        </p>
+      </div>
+      <div class="mb-6">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Password Confirmation<i
+            class="fa-solid fa-asterisk field-important"
+          ></i
+        ></label>
+        <input
+          formControlName="password_confirmation"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          type="text"
+        />
+        <ng-container
+          *ngIf="
+            passwordConfirmationControl && passwordConfirmationControl.invalid;
+            else passwordMismatch
+          "
+        >
+          <p class="text-xs text-red-700 mt-1">
+            {{ passwordConfirmationControl | fieldValidator }}
+          </p>
+        </ng-container>
+        <ng-template #passwordMismatch>
+          <ng-container
+            *ngIf="form && form.invalid && form.hasError('passwordMismatch')"
+          >
+            <p class="text-xs text-red-700 mt-1">
+              {{ form | fieldValidator }}
+            </p>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div
+    class="dialog--footer bg-gray-50 px-4 py-5 sm:px-6 sm:flex sm:flex-row-reverse"
+  >
+    <span class="flex w-full gap-x-2 rounded-md shadow-sm sm:ml-3 sm:w-auto">
+      <button
+        type="button"
+        (click)="onCloseDialog()"
+        class="btn-theme btn-theme-danger-outline"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn-theme btn-theme-primary"
+        type="submit"
+        loadingButton
+        [disabled]="loading || form.invalid"
+        [isLoading]="loading"
+      >
+        <span> Create User </span>
+      </button>
+    </span>
+  </div>
+</form>

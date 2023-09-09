@@ -1,0 +1,58 @@
+<div class="container mx-auto px-6 py-8">
+  <div class="flex items-center justify-between">
+    <h3 class="text-2xl font-medium">Permissions</h3>
+
+    <button class="btn-theme btn-theme-primary">
+      <i class="fas fa-plus"></i> Create Permission
+    </button>
+  </div>
+  <div class="mt-5 text-gray-700">
+    <div class="page--description text-sm text-gray-500">
+      Define the permissions that will be used to assign users.
+    </div>
+  </div>
+
+  <div class="page--data-table mt-5">
+    <table class="theme-table table-auto w-full">
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cursor-pointer hover:bg-gray-200">
+          <td>read:appointments</td>
+          <td>Read Appointments</td>
+          <td (click)="$event.stopPropagation()">
+            <div class="relative inline-block text-left flex justify-end">
+              <ui-dropdown id="1" [options]="tableMenuItemOptions">
+              </ui-dropdown>
+            </div>
+          </td>
+        </tr>
+        <tr class="cursor-pointer hover:bg-gray-200">
+          <td>write:schedule</td>
+          <td>Write Schedules</td>
+          <td (click)="$event.stopPropagation()">
+            <div class="relative inline-block text-left flex justify-end">
+              <ui-dropdown id="2" [options]="tableMenuItemOptions">
+              </ui-dropdown>
+            </div>
+          </td>
+        </tr>
+        <tr class="cursor-pointer hover:bg-gray-200">
+          <td>delete:schedule</td>
+          <td>Delete Schedules</td>
+          <td (click)="$event.stopPropagation()">
+            <div class="relative inline-block text-left flex justify-end">
+              <ui-dropdown id="3" [options]="tableMenuItemOptions">
+              </ui-dropdown>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

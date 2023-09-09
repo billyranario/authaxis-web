@@ -1,0 +1,15 @@
+<select
+  [formControl]="application"
+  [class]="classes"
+  (change)="onSelect($event)"
+>
+  <option value="">-- Select Application --</option>
+  <ng-container *ngFor="let application of applications; trackBy: trackById">
+    <option
+      [value]="application.id"
+      [selected]="application.id === selectedApplicationId"
+    >
+      {{ application.applicationName }}
+    </option>
+  </ng-container>
+</select>

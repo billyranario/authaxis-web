@@ -1,0 +1,22 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.theme-table {
+  thead {
+    th {
+      @apply border-b border-gray-200 py-4 text-left;
+    }
+  }
+  tbody {
+    tr {
+      @apply border-b border-gray-200;
+      td {
+        @apply py-3;
+        .theme-table--actions {
+          @apply flex justify-end;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+:host {
+  .theme-table {
+    td:first-child {
+      width: 290px;
+      .app-title {
+        width: 275px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

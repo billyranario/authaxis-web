@@ -1,0 +1,123 @@
+<form
+  class="mx-auto bg-white"
+  class="mx-auto bg-white"
+  [formGroup]="form"
+  (submit)="onSubmit()"
+>
+  <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+    <h3 class="dialog--title text-lg leading-6 font-medium text-gray-900">
+      Create Application
+    </h3>
+    <div class="dialog--body mt-5">
+      <div class="mb-6">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Application Name <i class="fa-solid fa-asterisk field-important"></i
+        ></label>
+        <input
+          formControlName="applicationName"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          type="text"
+          placeholder="Ex. Sample App"
+        />
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="applicationNameControl && applicationNameControl.invalid"
+        >
+          {{ applicationNameControl | fieldValidator }}
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <label for="domain" class="block text-sm font-medium text-gray-700"
+          >Domain <i class="fa-solid fa-asterisk field-important"></i></label
+        >
+        <input
+          formControlName="domain"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          type="text"
+          placeholder="Ex. yourdomain.com"
+        />
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="domainControl && domainControl.invalid"
+        >
+          {{ domainControl | fieldValidator }}
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <label
+          for="application-type"
+          class="block text-sm font-medium text-gray-700"
+          >Application Type <i class="fa-solid fa-asterisk field-important"></i></label
+        >
+        <select
+          formControlName="applicationType"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+        >
+          <option [value]="applicationTypes.WEB">Web</option>
+          <option [value]="applicationTypes.MOBILE">Mobile</option>
+        </select>
+        <p
+          class="text-xs text-red-700 mt-1"
+          *ngIf="applicationTypeControl && applicationTypeControl.invalid"
+        >
+          {{ applicationTypeControl | fieldValidator }}
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <label for="description" class="block text-sm font-medium text-gray-700"
+          >Description</label
+        >
+        <textarea
+          formControlName="description"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          rows="4"
+          placeholder="Add a description in less than 140 characters"
+        ></textarea>
+      </div>
+
+      <div class="mb-6">
+        <label
+          for="callback-urls"
+          class="block text-sm font-medium text-gray-700"
+          >Allowed Callback URLs</label
+        >
+        <textarea
+          formControlName="callbackApis"
+          class="w-full mt-2 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+          rows="4"
+        ></textarea>
+        <p class="mt-1 text-xs text-gray-500">
+          After the user authenticates we will only call back to any of these
+          URLs. <br />You can specify multiple valid URLs by comma-separating
+          them (typically to handle different environments like QA or testing).
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="dialog--footer bg-gray-50 px-4 py-5 sm:px-6 sm:flex sm:flex-row-reverse"
+  >
+    <span class="flex w-full gap-x-2 rounded-md shadow-sm sm:ml-3 sm:w-auto">
+      <button
+        type="button"
+        (click)="onCloseDialog()"
+        class="btn-theme btn-theme-danger-outline"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn-theme btn-theme-primary"
+        type="submit"
+        loadingButton
+        [disabled]="loading || form.invalid"
+        [isLoading]="loading"
+        (click)="onSubmit()"
+      >
+        <span> Create Application </span>
+      </button>
+    </span>
+  </div>
+</form>

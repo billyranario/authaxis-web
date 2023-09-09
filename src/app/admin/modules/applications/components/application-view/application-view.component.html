@@ -1,0 +1,53 @@
+<div class="container mx-auto px-6 py-8 relative">
+  <div class="head-actions mb-5">
+    <a
+      routerLink="/admin/applications"
+      class="text-sm text-theme-secondary-light hover:text-theme-primary items-center inline-flex gap-4"
+    >
+      <i class="fas fa-arrow-left"></i> Back to Applications
+    </a>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="app-icon">
+      <ui-icon icon="application" [width]="48" [height]="48"></ui-icon>
+    </div>
+    <div class="app-details">
+      <h3 class="text-2xl font-medium">{{ application?.applicationName }}</h3>
+      <div class="flex items-center text-sm text-gray-500">
+        App ID
+        <span class="mx-2 text-sm rounded-md bg-gray-200 p-2"
+          >{{ application?.id }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="mt-10 text-gray-700">
+    <div class="page--description text-sm text-gray-500 w-full lg:w-3/4">
+      <nav
+        mat-tab-nav-bar
+        class="theme-tabs-nav"
+        color="primary-700"
+        mat-stretch-tabs="false"
+        [@.disabled]="true"
+        [tabPanel]="tabPanel"
+      >
+        <a
+          *ngFor="let tab of tabs; let i = index"
+          mat-tab-link
+          [routerLink]="[tab.basePath, this.params.tenantId, tab.endPath]"
+          routerLinkActive
+          #tabItem="routerLinkActive"
+          [active]="tabItem.isActive"
+        >
+          {{ tab.label }}
+        </a>
+      </nav>
+
+      <mat-tab-nav-panel #tabPanel>
+        <div class="border px-4 py-10">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-tab-nav-panel>
+    </div>
+  </div>
+</div>

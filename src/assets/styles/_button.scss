@@ -1,0 +1,204 @@
+$base-unit: 4px;
+
+button.btn-theme {
+  @apply tracking-wide font-semibold rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center px-6 py-3 text-base gap-2;
+
+  // Colors
+  &-primary {
+    @apply bg-theme-primary text-white;
+
+    &:hover:not(:disabled) {
+      @apply bg-theme-primary-dark;
+    }
+
+    &:focus:not(:disabled) {
+      @apply ring-2 ring-offset-2 ring-theme-primary-dark;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-theme-primary-dark;
+    }
+
+    &-outline {
+      @apply bg-transparent border border-theme-primary text-theme-primary;
+
+      &:hover:not(:disabled) {
+        @apply bg-theme-primary-light text-white;
+      }
+
+      &:focus:not(:disabled) {
+        @apply ring-2 ring-offset-2 ring-theme-primary-light;
+      }
+
+      &:active:not(:disabled) {
+        @apply bg-theme-primary-dark text-white;
+      }
+    }
+  }
+
+  &-secondary {
+    @apply bg-gray-500 text-white;
+
+    &:hover:not(:disabled) {
+      @apply bg-gray-400;
+    }
+
+    &:focus:not(:disabled) {
+      @apply ring-2 ring-offset-2 ring-gray-400;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-gray-600;
+    }
+
+    &-outline {
+      @apply bg-transparent border border-gray-500 text-gray-500;
+
+      &:hover:not(:disabled) {
+        @apply bg-gray-500 text-white;
+      }
+
+      &:focus:not(:disabled) {
+        @apply ring-2 ring-offset-2 ring-gray-500;
+      }
+
+      &:active:not(:disabled) {
+        @apply bg-gray-600 text-white;
+      }
+    }
+  }
+
+  &-success {
+    @apply bg-green-500 text-white;
+
+    &:hover:not(:disabled) {
+      @apply bg-green-400;
+    }
+
+    &:focus:not(:disabled) {
+      @apply ring-2 ring-offset-2 ring-green-400;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-green-600;
+    }
+
+    &-outline {
+      @apply bg-transparent border border-green-500 text-green-500;
+
+      &:hover:not(:disabled) {
+        @apply bg-green-500 text-white;
+      }
+
+      &:focus:not(:disabled) {
+        @apply ring-2 ring-offset-2 ring-green-500;
+      }
+
+      &:active:not(:disabled) {
+        @apply bg-green-600 text-white;
+      }
+    }
+  }
+
+  &-warning {
+    @apply bg-yellow-500 text-gray-900;
+
+    &:hover:not(:disabled) {
+      @apply bg-yellow-400;
+    }
+
+    &:focus:not(:disabled) {
+      @apply ring-2 ring-offset-2 ring-yellow-400;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-yellow-600;
+    }
+
+    &-outline {
+      @apply bg-transparent border border-yellow-500 text-yellow-500;
+
+      &:hover:not(:disabled) {
+        @apply bg-yellow-500 text-gray-900;
+      }
+
+      &:focus:not(:disabled) {
+        @apply ring-2 ring-offset-2 ring-yellow-500;
+      }
+
+      &:active:not(:disabled) {
+        @apply bg-yellow-600 text-gray-900;
+      }
+    }
+  }
+
+  &-danger {
+    @apply bg-red-500 text-white;
+
+    &:hover:not(:disabled) {
+      @apply bg-red-400;
+    }
+
+    &:focus:not(:disabled) {
+      @apply ring-2 ring-offset-2 ring-red-400;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-red-600;
+    }
+
+    &-outline {
+      @apply bg-transparent border border-red-500 text-red-500;
+
+      &:hover:not(:disabled) {
+        @apply bg-red-500 text-white;
+      }
+
+      &:focus:not(:disabled) {
+        @apply ring-2 ring-offset-2 ring-red-500;
+      }
+
+      &:active:not(:disabled) {
+        @apply bg-red-600 text-white;
+      }
+    }
+  }
+
+  // Sizes
+  &-xs {
+    @apply px-2 py-1 text-xs;
+  }
+
+  &-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+
+  &-md {
+    @apply px-6 py-3 text-base;
+  }
+
+  &-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  &-xl {
+    @apply px-10 py-5 text-xl;
+  }
+
+  &-2xl {
+    @apply px-12 py-6 text-2xl;
+  }
+
+  &-3xl {
+    @apply px-14 py-7 text-3xl;
+  }
+
+  &-4xl {
+    @apply px-16 py-8 text-4xl;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

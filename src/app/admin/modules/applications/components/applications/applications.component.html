@@ -1,0 +1,97 @@
+<div class="container mx-auto px-6 py-8" *contentLoading="loadingApplications">
+  <div class="flex items-center justify-between">
+    <h3 class="text-2xl font-medium">Applications</h3>
+
+    <button
+      class="btn-theme btn-theme-primary"
+      (click)="openCreateApplicationDialog()"
+    >
+      <i class="fas fa-plus"></i> Create Application
+    </button>
+  </div>
+  <div class="mt-5 text-gray-700">
+    <div class="page--description text-sm text-gray-500 block">
+      Setup a mobile or web application to use AuthAxis for Authentication.
+    </div>
+    <ng-container *ngIf="applications.length > 0">
+      <div class="page--data-table mt-5 relative">
+        <div class="page--data-table-content">
+          <table class="theme-table table-auto w-full">
+            <tbody>
+              <ng-container
+                *ngFor="let application of applications; trackBy: trackById"
+              >
+                <tr
+                  class="cursor-pointer hover:bg-gray-200"
+                  (click)="onViewApplication(application.id)"
+                >
+                  <td>
+                    <div class="application-label flex item-center gap-4">
+                      <div class="app-icon">
+                        <ui-icon
+                          icon="application"
+                          [width]="48"
+                          [height]="48"
+                        ></ui-icon>
+                      </div>
+                      <div class="app-details">
+                        <div class="app-title">
+                          {{ application.applicationName }}
+                        </div>
+                        <div class="text-sm text-gray-400">
+                          {{ application.applicationTypeLabel }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="flex items-center text-sm text-gray-500">
+                      App ID
+                      <span class="mx-2 text-sm rounded-md bg-gray-200 p-2">{{
+                        application.id
+                      }}</span>
+                    </div>
+                  </td>
+                  <td (click)="$event.stopPropagation()">
+                    <div
+                      class="relative inline-block text-left flex justify-end"
+                    >
+                      <button
+                        [matMenuTriggerFor]="menu"
+                        class="rounded border border-gray-200 px-2"
+                      >
+                        <i class="fas fa-ellipsis"></i>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button
+                          mat-menu-item
+                          (click)="onViewApplication(application.id)"
+                        >
+                          <span>Settings</span>
+                        </button>
+                        <button
+                          mat-menu-item
+                          (click)="onDelete(application.id)"
+                        >
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <mat-paginator
+          [length]="meta.length"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="meta.pageSizeOptions"
+          aria-label="Select page"
+          (page)="onChangePage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </ng-container>
+  </div>
+</div>

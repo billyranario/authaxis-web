@@ -1,0 +1,206 @@
+<div class="bg-gray-100 h-screen flex flex-col relative">
+  <div
+    class="flex w-full min-h-screen font-sans text-gray-900 bg-gray-50 flex overflow-hidden"
+  >
+    <!-- Sidebar -->
+    <aside
+      class="py-6 w-64 border-r border-gray-200 h-full overflow-y-auto fixed z-50"
+    >
+      <h2 class="text-lg font-semibold mb-6 px-5">
+        <span class="text-theme-secondary">Auth</span
+        ><span class="text-theme-primary">Axis</span>
+      </h2>
+      <!-- <img src="/img/logo.png" alt="" class="w-28" /> -->
+
+      <ul class="menu-wrapper no-select flex flex-col gap-y-2">
+        <li *ngIf="menus.gettingStarted" class="px-5">
+          <a
+            routerLink="/admin/getting-started"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="lightning"></ui-icon>
+            <span>Getting Started</span>
+          </a>
+        </li>
+        <li *ngIf="menus.activity" class="px-5">
+          <a
+            routerLink="/admin/activity"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="sensor"></ui-icon>
+            <span>Activity</span>
+          </a>
+        </li>
+        <li *ngIf="menus.applications" class="px-5">
+          <a
+            routerLink="/admin/applications"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="stacks"></ui-icon>
+            <span>Applications</span>
+          </a>
+          <!-- <ul
+            id="applications-submenu"
+            class="menu-submenu hidden list-none"
+          >
+            <li class="pl-8 py-2">
+              <a
+                routerLink="/admin/applications"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-sm text-theme-secondary block"
+                >Applications</a
+              >
+            </li>
+            <li class="pl-8 py-2">
+              <a
+                routerLink="/admin/applications/api"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-sm text-theme-secondary block"
+                >APIs</a
+              >
+            </li>
+          </ul> -->
+        </li>
+        <li *ngIf="menus.authentication" class="px-5">
+          <a
+            routerLink="/admin/authentication"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="unlock"></ui-icon>
+            <span>Authentication</span>
+          </a>
+        </li>
+        <li *ngIf="menus.users" class="px-5">
+          <a
+            id="user-management-menu"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="
+              toggleSubMenu(
+                'user-management-menu',
+                'user-management-submenu',
+                'user-management-menu-icon'
+              )
+            "
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="users"></ui-icon>
+            <span>User Management</span>
+            <i
+              id="user-management-menu-icon"
+              class="menu-item-icon fas fa-angle-right transition-transform"
+            ></i>
+          </a>
+          <ul
+            id="user-management-submenu"
+            class="menu-submenu hidden list-none"
+          >
+            <li class="pl-8 py-2">
+              <a
+                routerLink="/admin/user-management/users"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-sm text-theme-secondary block"
+                >Users</a
+              >
+            </li>
+            <li class="pl-8 py-2">
+              <a
+                routerLink="/admin/user-management/roles"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-sm text-theme-secondary block"
+                >Roles</a
+              >
+            </li>
+            <li class="pl-8 py-2">
+              <a
+                routerLink="/admin/user-management/permissions"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-sm text-theme-secondary block"
+                >Permissions</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="menus.security" class="px-5">
+          <a
+            routerLink="/admin/security"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="data-protection"></ui-icon>
+            <span>Security</span>
+          </a>
+        </li>
+        <li *ngIf="menus.settings" class="px-5">
+          <a
+            routerLink="/admin/settings"
+            routerLinkActive="active"
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="settings"></ui-icon>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+      <div class="border-t border-gray-200 my-4"></div>
+      <ul class="menu-wrapper no-select flex flex-col gap-y-2">
+        <li class="px-5">
+          <a
+            class="menu-item-link flex gap-x-4 items-center py-2 text-gray-500 hover:text-theme-primary group cursor-pointer"
+          >
+            <span
+              class="menu-item-active absolute w-1.5 h-8 bg-theme-primary rounded-r-full left-0 scale-y-0 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out"
+            ></span>
+            <ui-icon icon="signout"></ui-icon>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <div class="flex-1 flex flex-col overflow-hidden ml-64">
+      <header
+        class="flex items-center justify-between p-6 bg-theme-secondary text-white border-b border-gray-200 shadow sticky top-0 z-40"
+      >
+        <div class="flex items-center">
+          <h2 class="text-sm font-semibold">Welcome, {{ user.firstname }}</h2>
+        </div>
+      </header>
+
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

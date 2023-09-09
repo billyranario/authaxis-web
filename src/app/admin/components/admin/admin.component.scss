@@ -1,0 +1,31 @@
+@import './../../../../assets/styles/var/color';
+
+:host {
+  .menu-wrapper {
+    li {
+      position: relative;
+      .menu-item-link {
+        .menu-item-icon {
+          position: absolute;
+          font-size: 14px;
+          color: $secondary-color-light;
+          right: 12px;
+          top: 12px;
+        }
+        &.active {
+          color: $primary-color;
+          .menu-item-active {
+            transform: translateX(0) !important;
+          }
+        }
+      }
+      .menu-submenu {
+        li {
+          .active {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
